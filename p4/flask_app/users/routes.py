@@ -38,11 +38,18 @@ def account():
     update_profile_pic_form = UpdateProfilePicForm()
     if request.method == "POST":
         if update_username_form.submit_username.data and update_username_form.validate():
-            # TODO: handle update username form submit
-            pass
+            current_user.modify(username=update_username_form.username.data)
+            current_user.save()
 
         if update_profile_pic_form.submit_picture.data and update_profile_pic_form.validate():
-            # TODO: handle update profile pic form submit
-            pass
-
-    # TODO: handle get requests
+            profile_pic_form = update_profile_pic_form.picture.data.read()
+            profile_pic_form_base64 = base64.b64encode(profile_pic_form.getvalue()).decode()
+            
+            if current_user.profile_pic.get() is None:
+                current_user.profile_pic.put(profile_pic_form_base64)
+            else:
+                current_user.replace(profile_pic=profile_pic_form_base64)
+            current_user.save()
+    
+    elif request.method == "GET":
+        return render_template("account.html", image = current_user.profile_pic)

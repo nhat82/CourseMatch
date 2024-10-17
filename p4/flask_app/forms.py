@@ -59,16 +59,16 @@ class LoginForm(FlaskForm):
     submit = None
 
 
-# TODO: implement
 class UpdateUsernameForm(FlaskForm):
-    username = None
-    submit_username = None 
+    username = StringField("Username", validators=[InputRequired(), Length(min=1, max=40)])
+    submit_username = SubmitField("Update")
 
-    # TODO: implement
     def validate_username(self, username):
-        pass
+        # check if the new username is already taken
+        if User.objects(username=username).first() is not None:
+            raise ValidationError("Username is taken, choose another name")
 
-# TODO: implement
+
 class UpdateProfilePicForm(FlaskForm):
-    picture = None
-    submit_picture = None
+    picture = FileField('Choose file',  validators=[InputRequired()])
+    submit_picture = SubmitField("Update")
