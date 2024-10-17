@@ -15,7 +15,17 @@ users = Blueprint("users", __name__)
 # TODO: implement
 @users.route("/register", methods=["GET", "POST"])
 def register():
-    return "register"
+    if current_user.is_authenticated:
+        return redirect(url_for('/'))
+    form = RegistrationForm()
+    
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+            user.save()
+            return redirect(url_for('login'))
+    return render_template('register.html', form = form)
 
 
 # TODO: implement
@@ -28,7 +38,8 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User.objects(username = form.username.data).first()
-            if user and bcrypt.check_password_hash(user.password, form.password.data):
+            
+            if user is not None and bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('account'))
             else:
