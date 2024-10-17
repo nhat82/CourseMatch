@@ -21,7 +21,19 @@ def register():
 # TODO: implement
 @users.route("/login", methods=["GET", "POST"])
 def login():
-    return "login"
+    if current_user.is_authenticated:
+        return redirect(url_for('/'))
+    
+    form = LoginForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User.objects(username = form.username.data).first()
+            if user and bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('account'))
+            else:
+                flash("Login failed!")
+    return render_template('login.html', form = form)
 
 
 # TODO: implement

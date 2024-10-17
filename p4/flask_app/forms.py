@@ -54,9 +54,9 @@ class RegistrationForm(FlaskForm):
 
 # TODO: implement fields
 class LoginForm(FlaskForm):
-    username = None
-    password = None
-    submit = None
+    username = StringField("Username", validators=[InputRequired(), Length(min=1, max=40)])
+    password = StringField("Password", validators=[InputRequired(), Length(min=1, max=40)])
+    submit = SubmitField("Login")
 
 
 class UpdateUsernameForm(FlaskForm):
@@ -70,5 +70,5 @@ class UpdateUsernameForm(FlaskForm):
 
 
 class UpdateProfilePicForm(FlaskForm):
-    picture = FileField('Choose file',  validators=[InputRequired()])
+    picture = FileField('Choose file',  validators=[InputRequired(), FileAllowed(['png', 'jpg'])])
     submit_picture = SubmitField("Update")
