@@ -52,10 +52,9 @@ class RegistrationForm(FlaskForm):
             raise ValidationError("Email is taken")
 
 
-# TODO: implement fields
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired(), Length(min=1, max=40)])
-    password = StringField("Password", validators=[InputRequired(), Length(min=1, max=40)])
+    password = PasswordField("Password", validators=[InputRequired(), Length(min=1, max=40)])
     submit = SubmitField("Login")
 
 
@@ -65,7 +64,8 @@ class UpdateUsernameForm(FlaskForm):
 
     def validate_username(self, username):
         # check if the new username is already taken
-        if User.objects(username=username).first() is not None:
+        user = User.objects(username=username.data).first()
+        if user is not None:
             raise ValidationError("Username is taken, choose another name")
 
 

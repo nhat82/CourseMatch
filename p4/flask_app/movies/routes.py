@@ -69,7 +69,12 @@ def movie_detail(movie_id):
 
 @movies.route("/user/<username>")
 def user_detail(username):
-    #uncomment to get review image
     user = User.objects(username=username).first()
+    if user is None:
+        error_message = f"No user found"
+        return render_template('user_detail.html', error=error_message)
     img = get_b64_img(user.username) #use their username for helper function
-    return render_template('user_detail.html',image=img)
+    
+    user_reviews = list(Review.objects(commenter=current_user))
+    num_user_reviews = len(user_reviews)
+    return render_template('user_detail.html',image=img, num_user_reviews=num_user_reviews, user_reviews=user_reviews)

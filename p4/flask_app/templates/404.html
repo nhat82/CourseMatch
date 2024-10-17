@@ -1,5 +1,5 @@
-{% extends "base.html" %}
+{% extends "header.html" %}
 {% block content %}
-<h1>Page not found!</h1>
-<a href="{{ url_for('index') }}">Back to Home</a>
+    <h1>Page not found!</h1>
+    <a href="{{ url_for('movies.index') }}" style="color: lightblue; text-decoration: underline;">Back to Home</a>
 {% endblock %}
