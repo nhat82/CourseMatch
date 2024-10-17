@@ -51,7 +51,8 @@ def login():
 @users.route("/logout")
 @login_required
 def logout():
-    return "logout"
+    logout_user()
+    return redirect('/')
 
 
 @users.route("/account", methods=["GET", "POST"])
@@ -73,6 +74,4 @@ def account():
             else:
                 current_user.replace(profile_pic=profile_pic_form_base64)
             current_user.save()
-    
-    elif request.method == "GET":
         return render_template("account.html", image = current_user.profile_pic)
