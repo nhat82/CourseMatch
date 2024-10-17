@@ -73,8 +73,8 @@ def user_detail(username):
     if user is None:
         error_message = f"No user found"
         return render_template('user_detail.html', error=error_message)
-    img = get_b64_img(user.username) #use their username for helper function
     
+    img = get_b64_img(user.username) #use their username for helper function
     user_reviews = list(Review.objects(commenter=current_user))
     num_user_reviews = len(user_reviews)
     return render_template('user_detail.html',image=img, num_user_reviews=num_user_reviews, user_reviews=user_reviews)
