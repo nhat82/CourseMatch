@@ -13,26 +13,27 @@ from werkzeug.utils import secure_filename
 
 
 # stdlib
-from datetime import datetime
+
+# from datetime import datetime
 import os
 
 # local
-from .client import MovieClient
+from .client import CourseClient
 
 # update with your API Key
-OMDB_API_KEY = 'fc5360f7' 
+# OMDB_API_KEY = 'fc5360f7' 
 
 # do not remove these 2 lines (required for autograder to work)
-if os.getenv('OMDB_API_KEY'):
-    OMDB_API_KEY = os.getenv('OMDB_API_KEY')
+# if os.getenv('OMDB_API_KEY'):
+#     OMDB_API_KEY = os.getenv('OMDB_API_KEY')
 
 db = MongoEngine()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
-movie_client = MovieClient(OMDB_API_KEY)
+course_client = CourseClient()
 
 from .users.routes import users
-from .movies.routes import movies
+from .courses.routes import courses
 
 def custom_404(e):
     return render_template("404.html"), 404
@@ -50,7 +51,7 @@ def create_app(test_config=None):
     bcrypt.init_app(app)
 
     app.register_blueprint(users)
-    app.register_blueprint(movies)
+    app.register_blueprint(courses)
     app.register_error_handler(404, custom_404)
 
     login_manager.login_view = "users.login"

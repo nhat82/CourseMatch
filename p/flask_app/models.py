@@ -13,6 +13,8 @@ class User(db.Document, UserMixin):
     email = db.EmailField(unique=True, required=True)
     password = db.StringField(required=True)
     profile_pic = db.ImageField()
+    interested_courses = db.ListField(db.StringField(), default=list)
+    enrolled_courses = db.ListField(db.StringField(), default=list)
 
     # Returns unique string identifying our object
     def get_id(self):
