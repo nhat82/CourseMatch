@@ -1,0 +1,24 @@
+{% extends "header.html" %} {% block content %}
+
+{% if error_msg %}
+  <b class="text-red-400">
+    {{ error_msg }}
+  </b>
+{% endif %}
+
+{% if course %}
+
+{# Display card for the course details #}
+<div class="course-container">
+  <ul class="course-info">
+    <div class="course-title"> {{ course.name }}
+      <p class="course-date"> &middot; {{ course.title }}</p>
+    </div>
+    {# <img class="course-img" alt="alt text" src="{{ course.poster_url }}" /> #}
+    <li class="opacity-40 md:px-4"><b>Number of credits: </b> {{ course.credits }}</li>
+    <li class="opacity-40 md:px-4"><b>Descriptions: </b> {{ course.description }}</li>
+  </ul>
+
+  {# Reviews -- deleted #}
+  {#{% if current_user.is_authenticated %} -- deleted#}
+{% endif %} {% endblock content %}
