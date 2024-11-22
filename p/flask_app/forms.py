@@ -23,11 +23,11 @@ class SearchForm(FlaskForm):
     submit = SubmitField("Search")
 
 
-class MovieReviewForm(FlaskForm):
-    text = TextAreaField(
-        "Comment", validators=[InputRequired(), Length(min=5, max=500)]
-    )
-    submit = SubmitField("Enter Comment")
+# class MovieReviewForm(FlaskForm):
+#     text = TextAreaField(
+#         "Comment", validators=[InputRequired(), Length(min=5, max=500)]
+#     )
+#     submit = SubmitField("Enter Comment")
 
 
 class RegistrationForm(FlaskForm):
@@ -76,7 +76,7 @@ class UpdateProfilePicForm(FlaskForm):
 
 class AddCourseForm(FlaskForm):
     choices = [('interested', 'Interested'), ('enrolled', 'Enrolled')]
-    select_field = SelectField('Select an option', choices=choices)
+    select_field = SelectField('Select an option', choices=choices, validators=[InputRequired()])
     submit_add_course = SubmitField("+")
     
 

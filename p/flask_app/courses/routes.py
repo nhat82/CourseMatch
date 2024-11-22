@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import current_user
 
 from .. import course_client
-from ..forms import MovieReviewForm, SearchForm
+from ..forms import SearchForm, AddCourseForm
 from ..models import User, Review
 from ..utils import current_time
 
@@ -45,24 +45,22 @@ def course_detail(course_name):
         result = course_client.retrieve_course_by_id(course_name)
     except ValueError as e:
         return render_template("course_detail.html", error_msg=str(e))
-
-    # form = MovieReviewForm()
-    # if form.validate_on_submit():
-    #     review = Review(
-    #         commenter=current_user._get_current_object(),
-    #         content=form.text.data,
-    #         date=current_time(),
-    #         imdb_id=course_name,
-    #         movie_title=result.title,
-    #     )
-
-    #     review.save()
-
-    #     return redirect(request.path)
-
-    # reviews = Review.objects(imdb_id=course_name)
-
-    return render_template("course_detail.html", course=result)
+    
+    add_course_form = AddCourseForm()
+    
+    if current_user.is_authenticated:
+        if request.method == 'POST' and add_course_form.validate_on_submit():
+            option = add_course_form.select_field.data
+            if option == 'interested':
+                if course_name not in current_user.interested_courses:
+                    current_user.interested_courses.append(course_name)
+            else:
+                if course_name not in current_user.enrolled_courses:
+                    current_user.enrolled_courses.append(course_name)
+            current_user.save()
+            return render_template("course_detail.html", course=result, add_course_form=add_course_form)
+        
+    return redirect(url_for('courses.course_detail', course_name=course_name))
 
 
 @courses.route("/user/<username>")
