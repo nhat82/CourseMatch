@@ -1,10 +1,10 @@
 import base64,io
 from io import BytesIO
 from flask import Blueprint, render_template, url_for, redirect, request, flash
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from .. import course_client
-from ..forms import MovieReviewForm, SearchForm
+from ..forms import MovieReviewForm, SearchForm, AddCourseForm, RemoveCourseForm
 from ..models import User, Review
 from ..utils import current_time
 
@@ -76,3 +76,52 @@ def user_detail(username):
     user_reviews = list(Review.objects(commenter=current_user))
     num_user_reviews = len(user_reviews)
     return render_template('user_detail.html',image=img, num_user_reviews=num_user_reviews, user_reviews=user_reviews)
+
+@courses.route("/add_course/<course_name>", methods=["GET", "POST"])
+@login_required
+def add_course(course_name):
+    form = AddCourseForm()
+
+    if form.validate_on_submit():
+        course = course_name.strip
+        type = form.select_field.data
+        if type == "interested":
+            if course not in current_user.interested_courses:
+                current_user.interested_courses.append(course)
+                flash(f"'{course}'  added to Interested Courses.")
+            else:
+                flash(f"'{course_name}' is already in your Interested Courses.")
+        elif type == "enrolled":
+            if course not in current_user.enrolled_courses:
+                current_user.enrolled_courses.append(course)
+                flash(f"'{course}'  added to enrolled Courses.")
+            else:
+                flash(f"'{course_name}' is already in your Enrolled Courses.")
+        current_user.save()
+        return redirect(url_for("courses.index"))
+    return render_template("add_course.html", form=form, course_name=course)
+
+
+@courses.route("/remove_course/<course_name>", methods=["GET", "POST"])
+@login_required
+def remove_course(course_name):
+    form = RemoveCourseForm()  # Create the form instance
+
+    if form.validate_on_submit():  # Check if the form was submitted correctly
+        course_name = course_name.strip()
+
+        # Check if course exists in user's lists
+        if course_name in current_user.interested_courses:
+            current_user.interested_courses.remove(course_name)
+        elif course_name in current_user.enrolled_courses:
+            current_user.enrolled_courses.remove(course_name)
+        else:
+            flash("Course not found in your list!", "error")
+            return redirect(url_for("courses.index"))
+
+        # Save changes to the database
+        current_user.save()
+        flash("Course removed successfully!", "success")
+        return redirect(url_for("courses.index"))
+
+    return render_template("remove_course.html", form=form, course_name=course_name)
