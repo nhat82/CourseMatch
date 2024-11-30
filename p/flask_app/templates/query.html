@@ -7,7 +7,9 @@
 {% endif %}
 
 <div class="results-container">
-  <div class="decoration-container"><div class="decoration"></div></div>
+  <div class="decoration-container"><div class="decoration"></div>
+</div>
+
   {% for result in results %}
   <a 
     href="{{ url_for('courses.course_detail', course_name=result.name) }}"
@@ -19,7 +21,14 @@
   </a>
   {% endfor %}
 
-
+  {% for user in users %}
+  <a 
+    href="{{ url_for('courses.user_detail', username=user.username) }}"
+    class="group movie-card"
+  >
+    <h5 class="movie-card-content"> {{ user.username }}</h5>
+  </a>
+  {% endfor %}
 </div>
 
 {% endblock %}

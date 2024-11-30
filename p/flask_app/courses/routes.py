@@ -36,12 +36,12 @@ def query_results(query):
     except ValueError as e:
         return render_template("query.html", error_msg=str(e))
     
-    # users = []
-    # if current_user.is_authenticated:
-    #     users = User.objects(username = query)
+    users = []
+    if current_user.is_authenticated:
+        users = User.objects(username = query)
         
     # return render_template("query.html", results=results, users = users)
-    return render_template("query.html", results=results)
+    return render_template("query.html", results=results, users = users)
 
 
 @courses.route("/courses/<course_name>", methods=["GET", "POST"])
