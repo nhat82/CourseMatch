@@ -13,12 +13,13 @@
     href="{{ url_for('courses.course_detail', course_name=result.name) }}"
     class="group movie-card"
   >
-{# <img src="{{ result.poster_url }}" class="movie-card-img" alt="missing" /> #}
     <h5 class="movie-card-content"> {{ result.name }}
       <span class="text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
     </h5>
   </a>
   {% endfor %}
+
+
 </div>
 
 {% endblock %}

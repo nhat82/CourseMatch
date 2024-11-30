@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import current_user
 
 from .. import course_client
-from ..forms import MovieReviewForm, SearchForm
+from ..forms import SearchForm, AddCourseForm
 from ..models import User, Review
 from ..utils import current_time
 
@@ -35,7 +35,12 @@ def query_results(query):
         results = course_client.search(query)
     except ValueError as e:
         return render_template("query.html", error_msg=str(e))
-
+    
+    # users = []
+    # if current_user.is_authenticated:
+    #     users = User.objects(username = query)
+        
+    # return render_template("query.html", results=results, users = users)
     return render_template("query.html", results=results)
 
 
@@ -43,26 +48,25 @@ def query_results(query):
 def course_detail(course_name):
     try:
         result = course_client.retrieve_course_by_id(course_name)
+        return render_template("course_detail.html", course=result)
     except ValueError as e:
         return render_template("course_detail.html", error_msg=str(e))
-
-    # form = MovieReviewForm()
-    # if form.validate_on_submit():
-    #     review = Review(
-    #         commenter=current_user._get_current_object(),
-    #         content=form.text.data,
-    #         date=current_time(),
-    #         imdb_id=course_name,
-    #         movie_title=result.title,
-    #     )
-
-    #     review.save()
-
-    #     return redirect(request.path)
-
-    # reviews = Review.objects(imdb_id=course_name)
-
-    return render_template("course_detail.html", course=result)
+    
+    # add_course_form = AddCourseForm()
+    
+    # if current_user.is_authenticated:
+    #     if request.method == 'POST' and add_course_form.validate_on_submit():
+    #         option = add_course_form.select_field.data
+    #         if option == 'interested':
+    #             if course_name not in current_user.interested_courses:
+    #                 current_user.interested_courses.append(course_name)
+    #         else:
+    #             if course_name not in current_user.enrolled_courses:
+    #                 current_user.enrolled_courses.append(course_name)
+    #         current_user.save()
+    #         return render_template("course_detail.html", course=result, add_course_form=add_course_form)
+        
+    # return redirect(url_for('courses.course_detail', course_name=result))
 
 
 @courses.route("/user/<username>")
@@ -73,6 +77,6 @@ def user_detail(username):
         return render_template('user_detail.html', error=error_message)
     
     img = get_b64_img(user.username) #use their username for helper function
-    user_reviews = list(Review.objects(commenter=current_user))
-    num_user_reviews = len(user_reviews)
-    return render_template('user_detail.html',image=img, num_user_reviews=num_user_reviews, user_reviews=user_reviews)
+    
+    
+    return render_template('user_detail.html',image=img)
