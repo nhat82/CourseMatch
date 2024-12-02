@@ -9,12 +9,6 @@ from ..models import User, Review
 from ..utils import current_time
 
 courses = Blueprint("courses", __name__)
-""" ************ Helper for pictures uses username to get their profile picture************ """
-def get_b64_img(username):
-    user = User.objects(username=username).first()
-    bytes_im = io.BytesIO(user.profile_pic.read())
-    image = base64.b64encode(bytes_im.getvalue()).decode()
-    return image
 
 """ ************ View functions ************ """
 
@@ -48,22 +42,22 @@ def query_results(query):
 def course_detail(course_name):
     try:
         result = course_client.retrieve_course_by_id(course_name)
-        return render_template("course_detail.html", course=result)
+        # return render_template("course_detail.html", course=result)
     except ValueError as e:
         return render_template("course_detail.html", error_msg=str(e))
 
     return render_template("course_detail.html", course=result, current_user = current_user)
 
 
-@courses.route("/user/<username>")
-def user_detail(username):
-    user = User.objects(username=username).first()
-    if user is None:
-        error_message = f"No user found"
-        return render_template('user_detail.html', error=error_message)
+# @courses.route("/user/<username>")
+# def user_detail(username):
+#     user = User.objects(username=username).first()
+#     if user is None:
+#         error_message = f"No user found"
+#         return render_template('user_detail.html', error=error_message)
     
-    img = get_b64_img(user.username) #use their username for helper function
-    return render_template('user_detail.html',image=img)
+#     img = get_b64_img(user.username) #use their username for helper function
+#     return render_template('user_detail.html',image=img)
 
 @courses.route("/add_course/<course_name>", methods=["GET", "POST"])
 @login_required

@@ -89,5 +89,9 @@ class RemoveCourseForm(FlaskForm):
         # check if the current course already added
         
         
+class FollowForm(FlaskForm):
+    submit_follow = SubmitField("Follow")
     
-    
+class UnfollowForm(FlaskForm):
+    # can only unfollow if it's in the current user's list of following people
+    submit_unfollow = SubmitField("UnFollow")
