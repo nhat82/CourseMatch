@@ -77,11 +77,11 @@ class UpdateProfilePicForm(FlaskForm):
 class AddCourseForm(FlaskForm):
     choices = [('interested', 'Interested'), ('enrolled', 'Enrolled')]
     select_field = SelectField('Select an option', choices=choices)
-    submit_add_course = SubmitField("+")
+    submit_add_course = SubmitField("Add Course!")
     
 
 class RemoveCourseForm(FlaskForm):
-    submit_remove_course = SubmitField("-")
+    submit_remove_course = SubmitField("Remove Course!")
     # can only remove course if it's in the current user's list of courses added
     # def validate_remove(self, username):
         # get current user 

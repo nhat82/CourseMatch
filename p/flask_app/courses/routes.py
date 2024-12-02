@@ -62,7 +62,7 @@ def course_detail(course_name):
 
     # reviews = Review.objects(imdb_id=course_name)
 
-    return render_template("course_detail.html", course=result)
+    return render_template("course_detail.html", course=result, current_user = current_user)
 
 
 @courses.route("/user/<username>")
@@ -81,9 +81,10 @@ def user_detail(username):
 @login_required
 def add_course(course_name):
     form = AddCourseForm()
-
+    course = course_name.strip()
+    
     if form.validate_on_submit():
-        course = course_name.strip
+       
         type = form.select_field.data
         if type == "interested":
             if course not in current_user.interested_courses:
@@ -99,16 +100,17 @@ def add_course(course_name):
                 flash(f"'{course_name}' is already in your Enrolled Courses.")
         current_user.save()
         return redirect(url_for("courses.index"))
-    return render_template("add_course.html", form=form, course_name=course)
+    return render_template("add_course.html", form=form, course_name=course, current_user = current_user)
 
 
 @courses.route("/remove_course/<course_name>", methods=["GET", "POST"])
 @login_required
 def remove_course(course_name):
     form = RemoveCourseForm()  # Create the form instance
+    course = course_name.strip()
 
     if form.validate_on_submit():  # Check if the form was submitted correctly
-        course_name = course_name.strip()
+        
 
         # Check if course exists in user's lists
         if course_name in current_user.interested_courses:
@@ -124,4 +126,4 @@ def remove_course(course_name):
         flash("Course removed successfully!", "success")
         return redirect(url_for("courses.index"))
 
-    return render_template("remove_course.html", form=form, course_name=course_name)
+    return render_template("remove_course.html", form=form, course_name=course)
