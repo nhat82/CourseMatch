@@ -84,14 +84,16 @@ def account():
     profile_pic_base64 = base64.b64encode(profile_pic_bytes.getvalue()).decode()
     
     following_people = current_user.following_people
+    potential_courses = current_user.potential_courses()
     
     return render_template(
         "account.html",
-        update_username_form=update_username_form, 
-        update_profile_pic_form=update_profile_pic_form, 
+        update_username_form = update_username_form, 
+        update_profile_pic_form = update_profile_pic_form, 
         profile_pic_base64 = profile_pic_base64, 
-        following_people = following_people
-    )
+        following_people = following_people,
+        potential_courses = potential_courses
+        )
 
 
 @users.route("/user/<username>", methods=["GET", "POST"])

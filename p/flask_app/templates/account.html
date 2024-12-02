@@ -63,4 +63,13 @@
     {% endfor %}
 </ul>
 
+<h3>People you follow are taking/interested in these courses (sorted by count)</h3>
+<ul class="courses-container">
+    {% for course in potential_courses %}
+      <li class="course">
+        <a class="" href="{{ url_for('courses.course_detail', course_name=course) }}">{{course}}</a>
+      </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
