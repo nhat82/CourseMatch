@@ -23,7 +23,7 @@
 
   {% for user in users %}
   <a 
-    href="{{ url_for('courses.user_detail', username=user.username) }}"
+    href="{{ url_for('users.user_detail', username=user.username) }}"
     class="group movie-card"
   >
     <h5 class="movie-card-content"> {{ user.username }}</h5>
