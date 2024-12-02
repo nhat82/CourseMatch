@@ -88,7 +88,7 @@ if __name__ == "__main__":
     
     client = CourseClient()
     results = client.search(y)
-    print(len(results))
+    print(results[0])
     # print(results)
     # c = results[0]
     # print(type(c))

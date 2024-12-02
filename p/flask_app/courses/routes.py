@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import current_user, login_required
 
 from .. import course_client
-from ..forms import MovieReviewForm, SearchForm, AddCourseForm, RemoveCourseForm
+from ..forms import SearchForm, AddCourseForm, RemoveCourseForm
 from ..models import User, Review
 from ..utils import current_time
 
@@ -35,32 +35,22 @@ def query_results(query):
         results = course_client.search(query)
     except ValueError as e:
         return render_template("query.html", error_msg=str(e))
-
-    return render_template("query.html", results=results)
+    
+    users = []
+    if current_user.is_authenticated:
+        users = User.objects(username = query)
+        
+    # return render_template("query.html", results=results, users = users)
+    return render_template("query.html", results=results, users = users)
 
 
 @courses.route("/courses/<course_name>", methods=["GET", "POST"])
 def course_detail(course_name):
     try:
         result = course_client.retrieve_course_by_id(course_name)
+        return render_template("course_detail.html", course=result)
     except ValueError as e:
         return render_template("course_detail.html", error_msg=str(e))
-
-    # form = MovieReviewForm()
-    # if form.validate_on_submit():
-    #     review = Review(
-    #         commenter=current_user._get_current_object(),
-    #         content=form.text.data,
-    #         date=current_time(),
-    #         imdb_id=course_name,
-    #         movie_title=result.title,
-    #     )
-
-    #     review.save()
-
-    #     return redirect(request.path)
-
-    # reviews = Review.objects(imdb_id=course_name)
 
     return render_template("course_detail.html", course=result, current_user = current_user)
 
@@ -73,9 +63,7 @@ def user_detail(username):
         return render_template('user_detail.html', error=error_message)
     
     img = get_b64_img(user.username) #use their username for helper function
-    user_reviews = list(Review.objects(commenter=current_user))
-    num_user_reviews = len(user_reviews)
-    return render_template('user_detail.html',image=img, num_user_reviews=num_user_reviews, user_reviews=user_reviews)
+    return render_template('user_detail.html',image=img)
 
 @courses.route("/add_course/<course_name>", methods=["GET", "POST"])
 @login_required
