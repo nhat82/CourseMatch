@@ -1,4 +1,5 @@
-{% extends "header.html" %} {% block content %}
+{% extends "header.html" %}
+{% block content %}
 
 {% if error_msg %}
   <b class="text-red-400">
@@ -7,19 +8,26 @@
 {% endif %}
 
 {% if course %}
-
-{# Display card for the course details #}
 <div class="course-container">
   <ul class="course-info">
-    <div class="course-title"> {{ course.name }}
+    <div class="course-title"> 
+      {{ course.name }}
       <p class="course-date"> &middot; {{ course.title }}</p>
+      
+      {% if course.name not in current_user.interested_courses and course.name not in current_user.enrolled_courses %}
+        <button>
+          <a href="{{ url_for('courses.add_course', course_name=course.name) }}">Add Course</a>
+        </button>
+      {% else %}
+        <button>
+          <a href="{{ url_for('courses.remove_course', course_name=course.name) }}">Remove Course</a>
+        </button>
+      {% endif %}
     </div>
-    {# <img class="course-img" alt="alt text" src="{{ course.poster_url }}" /> #}
     <li class="opacity-40 md:px-4"><b>Number of credits: </b> {{ course.credits }}</li>
     <li class="opacity-40 md:px-4"><b>Descriptions: </b> {{ course.description }}</li>
   </ul>
+</div>
+{% endif %}
 
-  {# Reviews -- deleted #}
-  {#{% if current_user.is_authenticated %} -- deleted#}
-{% endif %} 
-{% endblock content %}
+{% endblock %}
