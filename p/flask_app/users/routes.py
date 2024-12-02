@@ -82,7 +82,16 @@ def account():
             return redirect(url_for('users.account'))
     profile_pic_bytes = BytesIO(current_user.profile_pic.read())
     profile_pic_base64 = base64.b64encode(profile_pic_bytes.getvalue()).decode()
-    return render_template("account.html",update_username_form=update_username_form, update_profile_pic_form=update_profile_pic_form, profile_pic_base64 = profile_pic_base64)
+    
+    following_people = current_user.following_people
+    
+    return render_template(
+        "account.html",
+        update_username_form=update_username_form, 
+        update_profile_pic_form=update_profile_pic_form, 
+        profile_pic_base64 = profile_pic_base64, 
+        following_people = following_people
+    )
 
 
 @users.route("/user/<username>", methods=["GET", "POST"])
