@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from datetime import datetime
 from . import db, login_manager
+from collections import Counter
 
 
 
@@ -20,6 +21,21 @@ class User(db.Document, UserMixin):
     # Returns unique string identifying our object
     def get_id(self):
         return self.username
+    
+    # Returns courses the user might be interested in based on what their following have
+    # Sorted by number of people interested/enrolled in 
+    def potential_courses(self):
+        courses = []
+        
+        for user in self.following_people:
+            courses.extend(user.interested_courses)
+            courses.extend(user.enrolled_courses)
+        
+        course_counts = Counter(courses)
+        sorted_courses = sorted(course_counts.items(), key=lambda x: x[1], reverse=True)
+        
+        return sorted_courses
+        
 
 
 class Review(db.Document):
