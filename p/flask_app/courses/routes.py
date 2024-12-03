@@ -79,13 +79,13 @@ def add_course(course_name):
                 current_user.interested_courses.append(course)
                 flash(f"'{course}'  added to Interested Courses.")
             else:
-                flash(f"'{course_name}' is already in your Interested Courses.")
+                flash(f"'{course_name}' is already in your Interested Courses.", "error")
         elif type == "enrolled":
             if course not in current_user.enrolled_courses:
                 current_user.enrolled_courses.append(course)
                 flash(f"'{course}'  added to enrolled Courses.")
             else:
-                flash(f"'{course_name}' is already in your Enrolled Courses.")
+                flash(f"'{course_name}' is already in your Enrolled Courses.", "error")
         current_user.save()
         return redirect(url_for("courses.index"))
     return render_template("add_course.html", form=form, course_name=course, current_user = current_user)

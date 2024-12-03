@@ -41,7 +41,7 @@ def login():
                 login_user(user)
                 return redirect(url_for('users.account'))
             else:
-                flash("Login failed!")
+                flash("Login failed!", 'auth-fail')
     return render_template('login.html', form = form)
 
 
