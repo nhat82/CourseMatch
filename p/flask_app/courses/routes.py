@@ -49,16 +49,6 @@ def course_detail(course_name):
     return render_template("course_detail.html", course=result, current_user = current_user)
 
 
-# @courses.route("/user/<username>")
-# def user_detail(username):
-#     user = User.objects(username=username).first()
-#     if user is None:
-#         error_message = f"No user found"
-#         return render_template('user_detail.html', error=error_message)
-    
-#     img = get_b64_img(user.username) #use their username for helper function
-#     return render_template('user_detail.html',image=img)
-
 @courses.route("/add_course/<course_name>", methods=["GET", "POST"])
 @login_required
 def add_course(course_name):
