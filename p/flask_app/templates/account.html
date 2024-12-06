@@ -78,7 +78,7 @@
     <ul>
         {% for course in current_user.interested_courses %}
         <li>
-            <a href="{{ url_for('courses.course_detail', course_name=course.name) }}">{{ course }}</a>
+            <a href="{{ url_for('courses.course_detail', course_name=course) }}">{{ course }}</a>
         </li>
         {% endfor %}
     </ul>
@@ -90,7 +90,7 @@
     <ul>
         {% for course in current_user.enrolled_courses %}
         <li>
-            <a href="{{ url_for('courses.course_detail', course_name=course.name) }}">{{ course }}</a>
+            <a href="{{ url_for('courses.course_detail', course_name=course) }}">{{ course }}</a>
         </li>
         {% endfor %}
     </ul>
