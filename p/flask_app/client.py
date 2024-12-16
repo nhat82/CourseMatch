@@ -1,6 +1,11 @@
+import json
 import requests
 # import planetterp as terp
 import re
+from PIL import Image
+import base64
+import io
+from io import BytesIO
 
 '''
 Separeate input string for search into 2 groups: Department and Course Number. 
@@ -45,7 +50,7 @@ class CourseClient(object):
         if label == "Course":
             data = requests.get(f"https://api.planetterp.com/v1/course?name={reformatted_string}").json() #course
         else:
-            data = requests.get(f"https://api.planetterp.com/v1/courses?department={reformatted_string}&limit=10").json() #department, limit 10 courses
+            data = requests.get(f"https://api.planetterp.com/v1/courses?department={reformatted_string}&limit=18").json() #department, limit 12 courses
         
         
         if 'error' in data and data["error"] == "course not found":
@@ -55,14 +60,20 @@ class CourseClient(object):
         # check if it's not a list. if not, then there's only 1 result
         if not isinstance(data, list):
             return [data]
-            
+        
+        # filter out any courses without titles
         result = []
+        data = list(filter(lambda x: x['title'] != None, data))
+        data = data[:12]
+
         ## We may have more results than are first displayed
         for terp_json in data:
             if 'error' in terp_json and terp_json["error"] == "course not found":
                 break
-            
             result.append(Course(terp_json))
+
+        # Sorting by course name to display it in order
+        result.sort(key=lambda x: x.name)
         return result
 
     def retrieve_course_by_id(self, course_name):
@@ -80,6 +91,46 @@ class CourseClient(object):
 
         return course
 
+class Club():
+    def __init__(self):
+        self.clubs = {}
+        try:
+            with open('clubs.json', 'r') as json_file:
+                self.clubs = json.load(json_file)
+        except:
+            print('Error in reading club data')
+    
+    def size(self):
+        return len(self.clubs)
+
+    def __repr__(self):
+        return json.dumps(self.clubs, indent=4)
+    
+    def search(self, search_string):
+        if search_string in self.clubs:
+            url = self.clubs[search_string]['img']
+            # Fetch the image from the URL
+            response = requests.get(url, stream=True)
+            response.raise_for_status()  # Raise an error for bad status codes
+            
+            # Open the image using PIL
+            image = Image.open(io.BytesIO(response.content))
+            
+            # Convert the image to bytes
+            data = io.BytesIO()
+            image.save(data, format="JPEG") 
+            
+            # Encode the bytes to Base64
+            encoded_img_data = base64.b64encode(data.getvalue()).decode("utf-8")
+
+            return [[search_string, self.clubs[search_string]['url'], self.clubs[search_string]['desc'], encoded_img_data]]
+        return []
+        
+
+
+
+
+
 
 ## -- Example usage -- ###
 if __name__ == "__main__":
@@ -89,6 +140,10 @@ if __name__ == "__main__":
     client = CourseClient()
     results = client.search(y)
     print(results[0])
+    club_sample = Club()
+    print(len(club_sample)) # 900+ clubs
+    print(club_sample.search("Sudanese Student Organization")[0][1]) # Provides link for club
+
     # print(results)
     # c = results[0]
     # print(type(c))

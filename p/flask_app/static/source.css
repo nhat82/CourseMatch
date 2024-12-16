@@ -4,7 +4,7 @@
 
 html {
   /* color-scheme: light dark; */
-  @apply bg-neutral-900 text-neutral-100 overflow-x-hidden w-screen;
+  @apply bg-red-900 text-neutral-100 overflow-x-hidden w-screen;
 }
 
 .navlink {

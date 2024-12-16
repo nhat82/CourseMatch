@@ -1,4 +1,5 @@
 # 3rd-party packages
+from ssl import CertificateError
 from flask import Flask, render_template, request, redirect, url_for
 from flask_mongoengine import MongoEngine
 from flask_login import (
@@ -11,14 +12,13 @@ from flask_login import (
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 
-
 # stdlib
 
 # from datetime import datetime
 import os
 
 # local
-from .client import CourseClient
+from .client import CourseClient, Club
 
 # update with your API Key
 # OMDB_API_KEY = 'fc5360f7' 
@@ -27,10 +27,13 @@ from .client import CourseClient
 # if os.getenv('OMDB_API_KEY'):
 #     OMDB_API_KEY = os.getenv('OMDB_API_KEY')
 
+
 db = MongoEngine()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 course_client = CourseClient()
+club = Club()
+
 
 from .users.routes import users
 from .courses.routes import courses

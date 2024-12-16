@@ -902,11 +902,17 @@ html {
   flex-direction: column;
 }
 
+
+@keyframes animated-text{
+  from{width: 0;}
+  to{width: 472px;}
+}
+
 .main-title {
   margin-left: auto;
   margin-right: auto;
   margin-top: 1.5rem;
-  margin-bottom: 3rem;
+  /*margin-bottom: 3rem;
   width: 30rem;
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
   --tw-gradient-from: #fff var(--tw-gradient-from-position);
@@ -918,8 +924,16 @@ html {
   text-align: center;
   font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 700;
-  color: transparent;
+  font-weight: 700; */
+
+  border-right: solid 3px rgba(0,255,0,.75);
+  white-space: nowrap;
+  overflow: hidden;    
+  font-family: 'Source Code Pro', monospace;  
+  font-size: 28px;
+  color: rgba(255,255,255,.70);
+  animation: animated-text 4s steps(29,end) 1s 1 normal both,
+             animated-cursor 600ms steps(29,end) infinite;
 }
 
 .searchbar {

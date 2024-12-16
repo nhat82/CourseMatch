@@ -1,7 +1,7 @@
 {% extends "header.html" %} {% block content %}
 <div class="main-container">
   <div class="decoration-main-container"><div class="decoration-main"></div></div>
-  <h2 class="main-title"> Search a course or a person</h2>
+  <h2 class="main-title"> Search a course,person,club</h2>
   <form class="searchbar" action="/" method="POST">
     {{ form.csrf_token }}
     {{ form.search_query(class="form-control") }}

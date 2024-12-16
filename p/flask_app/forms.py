@@ -87,6 +87,15 @@ class RemoveCourseForm(FlaskForm):
         # get current user 
         # user = User.__objects(username=username.data).first()
         # check if the current course already added
+
+class AddClubForm(FlaskForm):
+    choices = [('interested', 'Interested'), ('enrolled', 'Enrolled')]
+    select_field = SelectField('Select an option', choices=choices)
+    submit_add_course = SubmitField("Add Course!")
+    
+
+class RemoveClubForm(FlaskForm):
+    submit_remove_course = SubmitField("Remove Club!")
         
         
 class FollowForm(FlaskForm):
