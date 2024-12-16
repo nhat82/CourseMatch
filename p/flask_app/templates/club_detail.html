@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% if error_msg %}
+  <b class="text-red-400">
+    {{ error_msg }}
+  </b>
+{% endif %}
+
+{% if club %}
+<div class="course-container">
+  <ul class="course-info">
+    <div class="course-title" style="margin-left: 40%;"> 
+        <h1><b>{{ club[0][0] }}</b></h1>
+        <img src="data:image/jpeg;base64,{{ club[0][3] }}" width="100px">
+    </div>
+    <li class="opacity-40 md:px-4"><b>Link: </b> <a href="{{club[0][1]}}">{{ club[0][1] }}</a></li>
+    <li class="opacity-40 md:px-4"><b>Description: </b> {{ club[0][2] }}</li>
+    {% if club[0][0] not in current_user.interested_clubs and club[0][0] not in current_user.enrolled_clubs %}
+        <button>
+          <a href="{{ url_for('courses.add_club', club_name=club[0][0]) }}">Add Club</a>
+        </button>
+      {% else %}
+        <button>
+          <a href="{{ url_for('courses.remove_club', club_name=club[0][0]) }}">Remove Club</a>
+        </button>
+      {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock %}

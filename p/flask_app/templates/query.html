@@ -11,6 +11,15 @@
 </div>
 
   {% for result in results %}
+  {% if not course %}
+  <a href="{{ url_for('courses.club_detail', club_name=result[0]) }}"
+  class="group movie-card">
+    <h5 class="movie-card-content"> {{ result[0] }}
+      <img src="data:image/jpeg;base64,{{ result[3] }}" width="60px">
+      <!-- <span class="text-neutral-400 font-normal"> &middot; {{ result[3] }} </span> -->
+    </h5>
+  </a>
+{% else %}
   <a 
     href="{{ url_for('courses.course_detail', course_name=result.name) }}"
     class="group movie-card"
@@ -19,7 +28,8 @@
       <span class="text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
     </h5>
   </a>
-  {% endfor %}
+{% endif %}
+{% endfor %}
 
   {% for user in users %}
   <a 

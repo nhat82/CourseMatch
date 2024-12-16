@@ -95,3 +95,12 @@ class FollowForm(FlaskForm):
 class UnfollowForm(FlaskForm):
     # can only unfollow if it's in the current user's list of following people
     submit_unfollow = SubmitField("UnFollow")
+
+class AddClubForm(FlaskForm):
+    choices = [('interested', 'Interested'), ('enrolled', 'Enrolled')]
+    select_field = SelectField('Select an option', choices=choices)
+    submit_add_course = SubmitField("Add Course!")
+
+
+class RemoveClubForm(FlaskForm):
+    submit_remove_course = SubmitField("Remove Club!")
