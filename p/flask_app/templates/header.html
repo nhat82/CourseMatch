@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% block header %}
 <nav class="navbar flex w-full justify-between z-40">
     <a class="m-5 navlink" href="{{ url_for('courses.index') }}">
-        <span class="hidden sm:block">Course Match</span>
-        <span class="block sm:hidden">Home</span>
+        <!-- <span class="hidden sm:block">Course Match</span> -->
+        <span class="block">Home</span>
     </a>
     {% if current_user.is_authenticated %}
     <div class="flex">
