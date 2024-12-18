@@ -20,15 +20,18 @@ A website that UMD students can go on & see what courses their friends are in. S
     - `/course_name`: page for a course, show description. If not logged in, wants to be enrolled/interested/taken → takes to register
     - `/add_course/<course_name>`: form to add course to be interested/enrolled.
     - `/remove_course/<course_name>`: form to remove course from interested/enrolled.
+    - `/courses/club/<club_name>`: page for a club, show description, link. If not logged in, wants to be enrolled/interested/taken → takes to register
+    - `/add_club/<club_name>`: form to add club to be interested/enrolled.
+    - `/remove_club/<club_name>`: form to remove club from interested/enrolled.
 2. Users: 
     - `/register`: Register
     - `/login`: Login
     - `/logout`: Logout
     - `/account`: Current logged-in user's account details. Profile picture, Update username, profile picture forms. List users they are following, interested courses, enrolled courses, potential courses they might like based on the their following's courses. 
-    - `/user/<username>`: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
+    - `/user/<username>`: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button.
 
 ### Stored/retrieved from MongoDB
 User:Username, Email, Password, Following, Courses(enrolled, interested)
 
 ### API
-Pulls courses from Planetterp API, shows number of credits, prerequisites.
+Pulls courses from Planetterp API, shows number of credits, prerequisites. Webscrapped using webdriver to get all clubs from TerpLink
