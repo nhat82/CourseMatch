@@ -37,6 +37,20 @@ class User(db.Document, UserMixin):
         sorted_courses = sorted(course_counts.items(), key=lambda x: x[1], reverse=True)
         
         return sorted_courses
+    
+    # Returns clubs the user might be interested in based on what their following have
+    # Sorted by number of people interested/enrolled in 
+    def potential_clubs(self):
+        clubs = []
+        current_user_clubs = set(self.interested_courses + self.enrolled_clubs)
+
+        for user in self.following_people:
+            clubs.extend(c for c in user.interested_clubs + user.enrolled_clubs if c not in current_user_clubs)
+
+        club_counts = Counter(clubs)
+        sorted_clubs = sorted(club_counts.items(), key=lambda x: x[1], reverse=True)
+        
+        return sorted_clubs
         
 
 

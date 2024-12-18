@@ -74,6 +74,29 @@
     </ul>
 </div>
 
+<!-- Users Interested and Enrolled club -->
+<div class="account-info">
+    <h2 class="account_subheader">Interested Clubs</h2>
+    <ul>
+        {% for club in current_user.interested_clubs %}
+        <li class="account-list">
+            <a href="{{ url_for('courses.club_detail', club_name=club) }}"> &middot; {{ club }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="account-info">
+    <h2 class="account_subheader">Enrolled Clubs</h2>
+    <ul>
+        {% for club in current_user.enrolled_clubs %}
+        <li class="account-list">
+            <a href="{{ url_for('courses.club_detail', club_name=club) }}"> &middot; {{ club }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
 <div class="account-info">
     <h2 class="account_subheader">Following</h2>
     <ul>
@@ -91,6 +114,17 @@
         {% for course, _ in potential_courses %}
         <li class="account-list">
           <a href="{{ url_for('courses.course_detail', course_name=course) }}"> &middot; {{course}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="account-info">
+    <h2 class="account_subheader">People you follow are taking/interested in these clubs (sorted by count)</h2>
+    <ul>
+        {% for club, _ in potential_clubs %}
+        <li class="account-list">
+          <a href="{{ url_for('courses.club_detail', club_name=club) }}"> &middot; {{club}}</a>
         </li>
         {% endfor %}
     </ul>
