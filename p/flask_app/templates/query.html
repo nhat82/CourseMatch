@@ -7,38 +7,38 @@
 {% endif %}
 
 <div class="results-container">
-  <div class="decoration-container"><div class="decoration"></div>
-</div>
+  <div class="decoration-container"><div class="decoration"></div></div>
 
-  {% for result in results %}
-  {% if not course %}
-  <a href="{{ url_for('courses.club_detail', club_name=result[0]) }}"
-  class="group movie-card">
-    <h5 class="movie-card-content"> {{ result[0] }}
-      <img src="data:image/jpeg;base64,{{ result[3] }}" width="60px">
-      <!-- <span class="text-neutral-400 font-normal"> &middot; {{ result[3] }} </span> -->
-    </h5>
-  </a>
-{% else %}
-  <a 
-    href="{{ url_for('courses.course_detail', course_name=result.name) }}"
-    class="group movie-card"
-  >
-    <h5 class="movie-card-content"> {{ result.name }}
-      <span class="text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
-    </h5>
-  </a>
-{% endif %}
-{% endfor %}
+  {% if results|length > 0 %}
+    {% for result in results %}
+      {% if not course %}
+        <a href="{{ url_for('courses.club_detail', club_name=result[0]) }}"
+           class="group movie-card">
+          <h5 class="movie-card-content"> {{ result[0] }}
+            <img src="data:image/jpeg;base64,{{ result[3] }}" width="60px">
+          </h5>
+        </a>
+      {% else %}
+        {% if result.name %}
+          <a href="{{ url_for('courses.course_detail', course_name=result.name) }}"
+             class="group movie-card">
+            <h5 class="movie-card-content"> {{ result.name }}
+              <span class="text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
+            </h5>
+          </a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
-  {% for user in users %}
-  <a 
-    href="{{ url_for('users.user_detail', username=user.username) }}"
-    class="group movie-card"
-  >
-    <h5 class="movie-card-content"> {{ user.username }}</h5>
-  </a>
-  {% endfor %}
+  {% if users|length > 0 %}
+    {% for user in users %}
+      <a href="{{ url_for('users.user_detail', username=user.username) }}"
+         class="group movie-card">
+        <h5 class="movie-card-content"> {{ user.username }}</h5>
+      </a>
+    {% endfor %}
+  {% endif %}
 </div>
 
 {% endblock %}
