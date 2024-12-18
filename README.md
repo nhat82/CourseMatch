@@ -28,7 +28,7 @@ A website that UMD students can go on & see what courses their friends are in. S
     - `/user/<username>`: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
 
 ### Stored/retrieved from MongoDB
-User:Username, Email, Password, Following Courses(enrolled, interested)
+User:Username, Email, Password, Following, Courses(enrolled, interested)
 
 ### API
 Pulls courses from Planetterp API, shows number of credits, prerequisites.
