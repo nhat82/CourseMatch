@@ -1,4 +1,4 @@
-A website that UMD students can go on & see what courses/clubs their friends are in. Students can register, log in, and have a profile with enrolled/interested to enroll courses. Students can also have a following list and see what they are taking. Course listings pulls from planetterp API. Home Page can search for courses and people.
+A website that UMD students can go on & see what courses their friends are in. Students can register, log in, and have a profile with enrolled/interested to enroll courses. Students can also have a following list and see what they are taking. Course listings pulls from planetterp API. Home Page can search for courses and people.
 
 **Functionality will only be available to logged-in users**
 - View their profile page
@@ -28,11 +28,4 @@ Course Form: Used to add/remove a course
     - `/user/<username>: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
 
 **Stored/retrieved from MongoDB**
-User
-    - Username
-    - Email
-    - Password
-    - Following
-    - Courses
-        - enrolled
-        - interested
+User:Username, Email, Password, Following Courses(enrolled, interested)
