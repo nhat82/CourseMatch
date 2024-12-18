@@ -25,7 +25,7 @@ A website that UMD students can go on & see what courses their friends are in. S
     - `/login`: Login
     - `/logout`: Logout
     - `/account`: Current logged-in user's account details. Profile picture, Update username, profile picture forms. List users they are following, interested courses, enrolled courses, potential courses they might like based on the their following's courses. 
-    - `/user/<username>: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
+    - `/user/<username>`: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
 
 ### Stored/retrieved from MongoDB
 User:Username, Email, Password, Following Courses(enrolled, interested)
