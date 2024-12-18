@@ -14,16 +14,18 @@ Follow Form: Used to follow/unfollow another user
 Course Form: Used to add/remove a course
 
 **Routes**
-1. Landing page: main.py
-    - `/index`
-    - `/search`
-2. Course: course.py
-    - `/courses:` list all courses
-    - `/course_name`: page for a course, show description.
-        - if not logged in, wants to be enrolled/interested/taken → takes to register
-4. User: User.py
-    - `/user/<username>`:Profile page
-    - `/user/<username>: List current user’s friends. List courses interested and enrolled.
+1. Courses:
+    - `/index`: Home Page
+    - `/search-results/<query>`: Search Person (have to be exact username), Course by (department or specific course name)
+    - `/course_name`: page for a course, show description. If not logged in, wants to be enrolled/interested/taken → takes to register
+    - `/add_course/<course_name>`: form to add course to be interested/enrolled.
+    - `/remove_course/<course_name>`: form to remove course from interested/enrolled.
+2. Users: 
+    - `/register`: Register
+    - `/login`: Login
+    - `/logout`: Logout
+    - `/account`: Current logged-in user's account details. Profile picture, Update username, profile picture forms. List users they are following, interested courses, enrolled courses, potential courses they might like based on the their following's courses. 
+    - `/user/<username>: Detail page of other user. List courses interested and enrolled. Show whether Following or not, show Follow/Unfollow button. 
 
 **Stored/retrieved from MongoDB**
 User
