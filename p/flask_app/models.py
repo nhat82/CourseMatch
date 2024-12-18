@@ -16,6 +16,8 @@ class User(db.Document, UserMixin):
     profile_pic = db.ImageField()
     interested_courses = db.ListField(db.StringField(), default=list)
     enrolled_courses = db.ListField(db.StringField(), default=list)
+    interested_clubs = db.ListField(db.StringField(), default=list)
+    enrolled_clubs = db.ListField(db.StringField(), default=list)
     following_people = db.ListField(db.ReferenceField('User'), default=list)
 
     # Returns unique string identifying our object

@@ -18,7 +18,7 @@ from werkzeug.utils import secure_filename
 import os
 
 # local
-from .client import CourseClient
+from .client import CourseClient, Club
 
 # update with your API Key
 # OMDB_API_KEY = 'fc5360f7' 
@@ -31,6 +31,7 @@ db = MongoEngine()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 course_client = CourseClient()
+club = Club()
 
 from .users.routes import users
 from .courses.routes import courses
