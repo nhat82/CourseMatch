@@ -1,9 +1,11 @@
 {% extends "header.html" %} {% block content %}
+
 {% if error %}
     <b class="text-red-400" role="alert">
         {{ error }}
     </b>
 {% endif %}
+
 <div class="container mx-auto w-full md:w-2/3 lg:w-1/3">
 
     {# User's Profile Picture #}
@@ -12,12 +14,12 @@
     {% if follow %}
     <form method="POST">
         {{ unfollow_form.hidden_tag() }}
-        <button type="submit">{{ unfollow_form.submit_unfollow }}</button>
+        {{ unfollow_form.submit_unfollow(class="navlink mx-auto !bg-red-400/20 !text-red-400") }}
     </form>
     {% else %}
         <form method="POST">
             {{ follow_form.hidden_tag() }}
-            <button type="submit">{{ follow_form.submit_follow }}</button>
+            {{ follow_form.submit_follow(class="navlink mx-auto") }}
         </form>
     {% endif %}
 

@@ -94,4 +94,4 @@ class FollowForm(FlaskForm):
     
 class UnfollowForm(FlaskForm):
     # can only unfollow if it's in the current user's list of following people
-    submit_unfollow = SubmitField("UnFollow")
+    submit_unfollow = SubmitField("Unfollow")
