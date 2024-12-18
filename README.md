@@ -1,9 +1,9 @@
-A website that UMD students can go on & see what courses their friends are in. Students can register, log in, and have a profile with enrolled/interested to enroll courses. Students can also have a following list and see what they are taking. Course listings pulls from planetterp API. Home Page can search for courses and people.
+A website that UMD students can go on & see what courses/club their friends are in or interested in. Students can register, log in, and have a profile with enrolled/interested to enroll courses, clubs. Students can also have a following list and see what they are taking. Course listings pulls from planetterp API and TerpLink. Home Page can search for courses, clubs, and people.
 
 ### Functionality will only be available to logged-in users
 - View their profile page
 - Follow/unfollowing people
-- Add a course they’re have enrolled or interested in
+- Add courses, clubs they’re have enrolled or interested in
 - See list of following people
 - See list of courses
 
@@ -12,6 +12,7 @@ A website that UMD students can go on & see what courses their friends are in. S
 2. Login Form: Email, password 
 3. Follow Form: Used to follow/unfollow another user
 4. Course Form: Used to add/remove a course
+5. Club Form: Used to add/remove a course
 
 ### Routes
 1. Courses:
