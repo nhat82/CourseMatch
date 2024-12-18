@@ -7,16 +7,14 @@
 {% endif %}
 
 <div class="results-container">
-  <div class="decoration-container"><div class="decoration"></div>
-</div>
 
   {% for result in results %}
   <a 
     href="{{ url_for('courses.course_detail', course_name=result.name) }}"
-    class="group movie-card"
+    class="group course-card"
   >
-    <h5 class="movie-card-content"> {{ result.name }}
-      <span class="text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
+    <h5 class="course-card-content"> {{ result.name }}
+      <span class="text-neutral-600 dark:text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
     </h5>
   </a>
   {% endfor %}
@@ -24,9 +22,9 @@
   {% for user in users %}
   <a 
     href="{{ url_for('users.user_detail', username=user.username) }}"
-    class="group movie-card"
+    class="group course-card"
   >
-    <h5 class="movie-card-content"> {{ user.username }}</h5>
+    <h5 class="course-card-content"> {{ user.username }}</h5>
   </a>
   {% endfor %}
 </div>

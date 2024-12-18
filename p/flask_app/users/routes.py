@@ -106,6 +106,8 @@ def user_detail(username):
         return render_template('user_detail.html', error=error_message)
     
     img = get_b64_img(user.username) 
+    interested_courses = user.interested_courses
+    enrolled_courses = user.enrolled_courses
     
     follow_form = FollowForm(prefix="follow")
     unfollow_form = UnfollowForm(prefix="unfollow")
@@ -131,5 +133,7 @@ def user_detail(username):
         image=img,
         follow_form=follow_form,
         unfollow_form=unfollow_form,
-        follow=is_following
+        follow=is_following, 
+        interested_courses = interested_courses, 
+        enrolled_courses = enrolled_courses
     )
