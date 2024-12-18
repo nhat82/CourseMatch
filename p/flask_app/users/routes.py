@@ -85,6 +85,7 @@ def account():
     
     following_people = current_user.following_people
     potential_courses = current_user.potential_courses()
+    potential_clubs = current_user.potential_clubs()
     
     return render_template(
         "account.html",
@@ -92,7 +93,8 @@ def account():
         update_profile_pic_form = update_profile_pic_form, 
         profile_pic_base64 = profile_pic_base64, 
         following_people = following_people,
-        potential_courses = potential_courses
+        potential_courses = potential_courses,
+        potential_clubs = potential_clubs
         )
 
 
@@ -108,6 +110,9 @@ def user_detail(username):
     img = get_b64_img(user.username) 
     interested_courses = user.interested_courses
     enrolled_courses = user.enrolled_courses
+    
+    interested_clubs = user.interested_clubs
+    enrolled_clubs = user.enrolled_clubs
     
     follow_form = FollowForm(prefix="follow")
     unfollow_form = UnfollowForm(prefix="unfollow")
@@ -135,5 +140,7 @@ def user_detail(username):
         unfollow_form=unfollow_form,
         follow=is_following, 
         interested_courses = interested_courses, 
-        enrolled_courses = enrolled_courses
+        enrolled_courses = enrolled_courses, 
+        interested_clubs = interested_clubs,
+        enrolled_clubs = enrolled_clubs
     )
