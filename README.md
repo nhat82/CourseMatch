@@ -8,10 +8,10 @@ A website that UMD students can go on & see what courses their friends are in. S
 - See list of courses
 
 **Forms**
-Register Form: Username, email, password
-Login Form: Email, password
-Follow Form: Used to follow/unfollow another user
-Course Form: Used to add/remove a course
+Register Form: Username, email, password \ 
+Login Form: Email, password \ 
+Follow Form: Used to follow/unfollow another user \
+Course Form: Used to add/remove a course \
 
 **Routes**
 1. Courses:
@@ -29,3 +29,6 @@ Course Form: Used to add/remove a course
 
 **Stored/retrieved from MongoDB**
 User:Username, Email, Password, Following Courses(enrolled, interested)
+
+**API**
+Pulls courses from Planetterp API, shows number of credits, prerequisites.
