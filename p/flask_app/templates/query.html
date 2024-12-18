@@ -7,26 +7,27 @@
 {% endif %}
 
 <div class="results-container">
-
+  {% if results|length > 0 %}
   {% for result in results %}
-  <a 
-    href="{{ url_for('courses.course_detail', course_name=result.name) }}"
-    class="group course-card"
-  >
-    <h5 class="course-card-content"> {{ result.name }}
-      <span class="text-neutral-600 dark:text-neutral-400 font-normal"> &middot; {{ result.title }} </span>
-    </h5>
-  </a>
-  {% endfor %}
+    {% if result.name %}
+      <h5 class="course-card-content">{{ result.name }}</h5>
+      <a href="{{ url_for('courses.course_detail', course_name=result.name) }}" class="group course-card">
+        <!-- <span class="text-neutral-600 dark:text-neutral-400 font-normal"> {{ result.title }} </span> -->
+      </a>
+    {% endif %}
+    {% endfor %}
+  {% endif %}
 
-  {% for user in users %}
-  <a 
-    href="{{ url_for('users.user_detail', username=user.username) }}"
-    class="group course-card"
-  >
-    <h5 class="course-card-content"> {{ user.username }}</h5>
-  </a>
-  {% endfor %}
+  {%if users|length > 0 %}
+    {% for user in users %}
+    <a 
+      href="{{ url_for('users.user_detail', username=user.username) }}"
+      class="group course-card"
+    >
+      <h5 class="course-card-content"> {{ user.username }}</h5>
+    </a>
+    {% endfor %}
+  {% endif %}
 </div>
 
 {% endblock %}
