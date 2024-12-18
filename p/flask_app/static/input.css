@@ -5,18 +5,16 @@
 html {
   color-scheme: light dark;
   font-family: sans-serif;
+
+  @apply bg-neutral-50 text-neutral-700 dark:bg-neutral-900 overflow-x-hidden w-screen;
 }
 
 .error {
   @apply text-red-500 bg-red-900 border border-red-500 p-4 rounded-lg;
 }
 
-.form-control {
-  @apply bg-neutral-900/50 rounded-full border-2 border-neutral-600/50 py-3 px-5 w-96 backdrop-blur-lg duration-150 focus:shadow-[0_0.5rem_3rem_-1rem_#fff2] focus:border-neutral-400/50 focus:outline-none;
-}
-
 .navlink {
-  @apply bg-neutral-50 w-fit rounded-md py-2 px-4 hover:bg-neutral-300 hover:duration-300 active:bg-neutral-400 active:duration-75 block text-black;
+  @apply bg-blue-100 text-blue-700 dark:bg-yellow-600/20 dark:text-yellow-400 w-fit rounded-md py-2 px-4 block;
 }
 
 .main-container {
@@ -24,9 +22,45 @@ html {
 }
 
 .main-title {
-  @apply text-4xl mx-auto mt-6 text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-600 w-[30rem] font-bold;
+  @apply text-4xl mx-auto mt-6 text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-400 w-[30rem] font-bold dark:from-yellow-400 dark:to-yellow-100;
 }
 
 .searchbar {
-  @apply flex -mb-2 relative text-white justify-center w-fit mx-auto;
+  @apply flex -mb-2 relative text-blue-800 dark:text-yellow-400 justify-center w-fit mx-auto;
+}
+
+.form-control {
+  @apply bg-neutral-100/50 dark:bg-neutral-800/80 rounded-md border-2 border-blue-400 dark:border-yellow-400/80 py-3 px-5 w-96 backdrop-blur-lg duration-150 focus:shadow-[0_0.5rem_3rem_-1rem_#fff2] focus:border-blue-400/50 dark:focus:border-yellow-400/40 focus:outline-none placeholder-blue-500 dark:placeholder-yellow-400;
+}
+
+.form-button {
+  @apply cursor-pointer !bg-blue-400/50 rounded-md px-4 py-2 font-bold absolute right-1.5 top-1.5 hover:scale-105 duration-300 active:duration-75 active:scale-90 dark:!bg-yellow-600/20;
+}
+
+.results-container {
+  @apply container flex 2xl:-mt-[3.5rem] mx-auto relative text-lg flex-wrap text-neutral-950 dark:text-neutral-100 gap-4 justify-center;
+}
+
+.course-card {
+  @apply flex justify-start flex-col cursor-pointer hover:bg-neutral-300 dark:hover:bg-neutral-700 rounded-md duration-300 w-96;
+}
+
+.course-card-content {
+  @apply mt-2 flex flex-col p-4 font-bold group-hover:scale-90 group-hover:-translate-y-4 duration-150;
+}
+
+.course-container {
+  @apply px-6 text-neutral-100 flex flex-col md:flex-row md:justify-between gap-4;
+}
+
+.course-info {
+  @apply flex flex-col gap-3 md:w-96;
+}
+
+.course-name {
+  @apply md:absolute md:top-6 md:left-40 text-2xl flex flex-col md:flex-row font-bold items-center;
+}
+
+.course-title {
+  @apply md:ml-2 font-normal text-lg block text-neutral-400;
 }
