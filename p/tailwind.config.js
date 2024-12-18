@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["../templates/**/*.{html,js}"],
+  content: ["./flask_app/templates/**/*.{html,js}"],
   // ...
 };

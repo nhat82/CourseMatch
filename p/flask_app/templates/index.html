@@ -1,10 +1,9 @@
 {% extends "header.html" %} {% block content %}
 <div class="main-container">
-  <div class="decoration-main-container"><div class="decoration-main"></div></div>
-  <h2 class="main-title"> Search a course or a person</h2>
+  <h2 class="main-title">Course Match</h2>
   <form class="searchbar" action="/" method="POST">
     {{ form.csrf_token }}
-    {{ form.search_query(class="form-control") }}
+    {{ form.search_query(class="form-control", placeholder="Search a course, club, or person") }}
 
     {% if form.search_query.errors %}
       <div class="error" role="alert">

@@ -10,22 +10,19 @@
 {% if course %}
 <div class="course-container">
   <ul class="course-info">
-    <div class="course-title"> 
+    <div class="course-name"> 
       {{ course.name }}
-      <p class="course-date"> &middot; {{ course.title }}</p>
-      
-      {% if course.name not in current_user.interested_courses and course.name not in current_user.enrolled_courses %}
-        <button>
-          <a href="{{ url_for('courses.add_course', course_name=course.name) }}">Add Course</a>
-        </button>
-      {% else %}
-        <button>
-          <a href="{{ url_for('courses.remove_course', course_name=course.name) }}">Remove Course</a>
-        </button>
-      {% endif %}
+      <p class="course-title"> &middot; {{ course.title }}</p>
     </div>
-    <li class="opacity-40 md:px-4"><b>Number of credits: </b> {{ course.credits }}</li>
-    <li class="opacity-40 md:px-4"><b>Descriptions: </b> {{ course.description }}</li>
+
+    {% if course.name not in current_user.interested_courses and course.name not in current_user.enrolled_courses %}
+      <a class="navlink mx-auto" href="{{ url_for('courses.add_course', course_name=course.name) }}">Add</a>
+    {% else %}
+      <a class="navlink mx-auto !bg-red-400/20 !text-red-400" href="{{ url_for('courses.remove_course', course_name=course.name) }}">Remove</a>
+    {% endif %}
+
+    <li class="md:px-4"><b>Number of credits: </b> {{ course.credits }}</li>
+    <li class="md:px-4">{{ course.description | safe}}</li>
   </ul>
 </div>
 {% endif %}

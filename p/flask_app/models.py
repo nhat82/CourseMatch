@@ -28,11 +28,11 @@ class User(db.Document, UserMixin):
     # Sorted by number of people interested/enrolled in 
     def potential_courses(self):
         courses = []
-        
+        current_user_courses = set(self.interested_courses)
+
         for user in self.following_people:
-            courses.extend(user.interested_courses)
-            courses.extend(user.enrolled_courses)
-        
+            courses.extend(c for c in user.interested_courses + user.enrolled_courses if c not in current_user_courses)
+
         course_counts = Counter(courses)
         sorted_courses = sorted(course_counts.items(), key=lambda x: x[1], reverse=True)
         
