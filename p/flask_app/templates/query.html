@@ -10,9 +10,8 @@
   {% if results|length > 0 %}
   {% for result in results %}
     {% if result.name %}
+      <a href="{{ url_for('courses.course_detail', course_name=result.name) }}" class="group course-card" >
       <h5 class="course-card-content">{{ result.name }}</h5>
-      <a href="{{ url_for('courses.course_detail', course_name=result.name) }}" class="group course-card">
-        <!-- <span class="text-neutral-600 dark:text-neutral-400 font-normal"> {{ result.title }} </span> -->
       </a>
     {% endif %}
     {% endfor %}
