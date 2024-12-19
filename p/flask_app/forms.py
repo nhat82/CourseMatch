@@ -99,8 +99,7 @@ class UnfollowForm(FlaskForm):
 class AddClubForm(FlaskForm):
     choices = [('interested', 'Interested'), ('enrolled', 'Enrolled')]
     select_field = SelectField('Select an option', choices=choices)
-    submit_add_course = SubmitField("Add Course!")
-
+    submit_add_club = SubmitField("Add Club!")
 
 class RemoveClubForm(FlaskForm):
-    submit_remove_course = SubmitField("Remove Club!")
+    submit_remove_club = SubmitField("Remove Club!")
