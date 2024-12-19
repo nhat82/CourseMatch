@@ -37,6 +37,6 @@ User:Username, Email, Password, Following, Courses(enrolled, interested)
 ### API
 Pulls courses from Planetterp API, shows number of credits, prerequisites. Webscrapped using webdriver to get all clubs from TerpLink
 
-## Video Demo
-![3A58D9AA-15C2-4C6F-98F1-B6AD49CE90D5_1_102_o](https://github.com/user-attachments/assets/fee92295-f57f-426d-bbbe-f676394e6385)
+## Video Demo Link: https://drive.google.com/file/d/1vvrA2Th76xeXRb6DBkaO1eRWZXd_Y6uy/view?usp=sharing
+
 
